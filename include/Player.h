@@ -39,7 +39,7 @@ class Player {
 		void takeDamage(int amnt, bool ambush=false) {
 			if(!ambush) { // only deal wall damage if ambush=true
 				wall -= amnt; // deal damage to wall
-				amnt = std::abs(wall); // Get the overflow amount
+				amnt = (wall < 0) ? std::abs(wall) : 0; // Get the overflow amount if damage overflowed
 				wall = std::max(0, wall); // restrict range
 			}
 			castle = std::max(0, castle - amnt); // deal overflow to castle
