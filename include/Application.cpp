@@ -30,6 +30,8 @@ int main() {
 	Player p = Player(newDeck, newHand);
 	std::cout << p.getHand() << std::endl;
 	
+	p.takeDamage(30, false);
+	
 	std::string in;
 	std::cin >> in;
 	

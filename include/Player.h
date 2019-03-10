@@ -9,6 +9,9 @@ class Player {
 		std::deque<Card> deck;
 		std::vector<Card> hand;
 		
+		int castle=30;
+		int wall=15;
+		
 		int builders=2;
 		int recruits=2;
 		int mages=2;
@@ -30,6 +33,17 @@ class Player {
 				str += c.getName() + " ";
 			}
 			return str;
+		}
+		
+		// Damage function that support ambushing
+		void takeDamage(int amnt, bool ambush=false) {
+			if(!ambush) { // only deal wall damage if ambush=true
+				wall -= amnt; // deal damage to wall
+				amnt = std::abs(wall); // Get the overflow amount
+				wall = std::max(0, wall); // restrict range
+			}
+			castle = std::max(0, castle - amnt); // deal overflow to castle
+			std::cout << "Wall: " << wall << " Castle: " << castle << std::endl;	
 		}
 		
 		void useBricks(int amnt) {
